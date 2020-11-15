@@ -1,5 +1,6 @@
 var express = require("express");
 var path = require("path");
+var fs = require("fs");
 
 // Sets up the Express App
 var app = express();
@@ -17,6 +18,12 @@ app.get("/notes", function (req, res) {
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
+
+app.get("/api/notes", function (req, res) {
+    fs.readFile("db/db.json", 'utf8', function(err, data) {
+        res.json(data);
+    });
+})
 
 // Starts the server to begin listening
 app.listen(PORT, function () {

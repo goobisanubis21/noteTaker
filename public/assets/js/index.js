@@ -151,5 +151,5 @@ $noteText.on("keyup", handleRenderSaveBtn);
 getAndRenderNotes();
 
 $(document).ready(function(){
-  console.log("working")
-})
+  console.log("connected");
+});
