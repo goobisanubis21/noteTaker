@@ -150,6 +150,6 @@ $noteText.on("keyup", handleRenderSaveBtn);
 // Gets and renders the initial list of notes
 getAndRenderNotes();
 
-$(document).ready(function(){
+$(document).ready(function () {
   console.log("connected");
 });

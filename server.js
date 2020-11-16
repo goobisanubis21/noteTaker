@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var fs = require("fs");
+var db = require("./db/db.json");
 
 // Sets up the Express App
 var app = express();
@@ -23,7 +24,19 @@ app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", 'utf8', function(err, data) {
         res.json(data);
     });
-})
+});
+
+app.post("/api/notes", function (req, res) {
+    var newNote = req.body;
+    fs.readFile("./db/db.json", function(err, data) {
+        var currentNotes = JSON.parse(data);
+        currentNotes.push(newNote);
+        fs.writeFile("./db/db.json", [JSON.stringify(currentNotes)], function(err) {
+            console.log(newNote)
+        })
+    })
+
+});
 
 // Starts the server to begin listening
 app.listen(PORT, function () {
