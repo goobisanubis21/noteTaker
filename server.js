@@ -24,7 +24,7 @@ app.get("/notes", function (req, res) {
 
 app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", 'utf8', function (err, data) {
-        res.json(data);
+        res.json(JSON.parse(data));
     });
 });
 
