@@ -45,8 +45,18 @@ app.post("/api/notes", function (req, res) {
 });
 
 app.delete("/api/notes/:id", function(req, res) {
-    var clicked = response.id
-    console.log(clicked);
+
+    var clicked = JSON.stringify(req.params);
+    console.log('clicked: ' + clicked);
+    fs.readFile('./db/db.json', function(err, data) {
+        var json = JSON.parse(data)
+        console.log(json)
+        for (var i = 0; i < json.length; i++) {
+            console.log('db:')
+            console.log(json);
+        }
+        res.sendFile(path.join(__dirname, "/public/notes.html"));
+    })
 });
 
 // Starts the server to begin listening
