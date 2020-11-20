@@ -3,6 +3,7 @@ var path = require("path");
 var fs = require("fs");
 var db = require("./db/db.json");
 var { v4: uuidv4 } = require("uuid");
+const { response } = require("express");
 
 
 // Sets up the Express App
@@ -38,9 +39,14 @@ app.post("/api/notes", function (req, res) {
         fs.writeFile("./db/db.json", [JSON.stringify(currentNotes)], function (err) {
             console.log(newNote)
         })
-        res.sendFile(path.join(__dirname, "/db/db.json"));
+        res.sendFile(path.join(__dirname, "/public/notes.html"));
     })
 
+});
+
+app.delete("/api/notes/:id", function(req, res) {
+    var clicked = response.id
+    console.log(clicked);
 });
 
 // Starts the server to begin listening
