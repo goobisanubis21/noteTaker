@@ -44,17 +44,16 @@ app.post("/api/notes", function (req, res) {
 
 });
 
-app.delete("/api/notes/:id", function(req, res) {
+app.delete("/api/notes/:id", function (req, res) {
 
-    var clicked = JSON.stringify(req.params);
+    var clicked = req.params.id;
     console.log('clicked: ' + clicked);
-    fs.readFile('./db/db.json', function(err, data) {
+    fs.readFile('./db/db.json', function (err, data) {
         var json = JSON.parse(data)
-        console.log(json)
-        for (var i = 0; i < json.length; i++) {
-            console.log('db:')
-            console.log(json);
-        }
+        var filtered = json.filter(note => note.id !== clicked)
+        fs.writeFile("./db/db.json", JSON.stringify(filtered), function (err) {
+            console.log('note deleted')
+        })
         res.sendFile(path.join(__dirname, "/public/notes.html"));
     })
 });
